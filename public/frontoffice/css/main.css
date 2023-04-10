@@ -1,0 +1,28 @@
+* {
+    font-family: cairo;
+}
+.list-unstyled > .list-item {
+    display: inline-block;
+    margin: 10px 7px;
+}
+.list-unstyled > .list-item > a{
+  text-decoration: none;
+  color: #cd0404;
+}
+.row {
+    
+}
+.row >div {
+    margin-left: -6px;
+    margin-right: -6px;
+}
+.badge {
+    padding: 9px 15px;
+    border-radius: 0;
+}
+.btn {
+    border-radius: 2px;
+}
+input{
+    border-radius: 0 !important;
+}

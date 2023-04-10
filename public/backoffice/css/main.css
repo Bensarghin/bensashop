@@ -1,0 +1,42 @@
+body {
+    background: #f8f9fa;
+}
+nav.bg-body-tertiary {
+    height: 68px;
+    background-color: #FFF !important;
+}
+.offcanvas {
+    width: 240px !important;
+    background-color: #00425AFF !important;
+    color: #FFF;
+}
+.offcanvas-body {
+    padding: 0;
+}
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+.list-group-item > a {
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+    padding: 20px;
+}
+.list-group-item > a:hover {
+   background-color: rgba(0, 0, 0, 0.2);
+}
+.list-group-item > a .sidebar-item {
+    display: inline-block;
+    margin-left: 16px;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.list-group-item > a i {
+    font-size: 20px;
+    font-weight: bold;
+    color: #9aa4b2;
+}
