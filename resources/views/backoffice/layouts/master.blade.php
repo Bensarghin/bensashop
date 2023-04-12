@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('frontoffice/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontoffice/css/all.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('backoffice/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('backoffice/css/images.css')}}">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
@@ -26,6 +26,31 @@
         <nav class="navbar bg-body-tertiary border-bottom">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Navbar</a>
+              <ul class="nav  ms-auto">
+                <li class="nav-item mx-3">
+                    <a href="" class="btn btn-primary position-relative">
+                        <i class="fa-solid fa-bell"></i> 
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{$orders->count()}}
+                        <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item mx-3 dropstart">
+                    <a href="#" class="btn btn-primary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><h5 class="dropdown-header">{{Auth::user()->name}}</h5></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{route('admin.user.edit')}}"><i class="fa-solid fa-user-lock"></i><span class="d-inline mx-2"> Authent </span></a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket"></i><span class="d-inline mx-2"> Logout </span></a>
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+              </ul>
             </div>
         </nav>
         <div class="offcanvas offcanvas-start show" style="visibility: visible; border:none;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
@@ -38,19 +63,19 @@
                         <a href="#"><i class="fa-solid fa-house"></i><span class="sidebar-item"> Dashboard</span>  </a>
                     </li>
                     <li class="list-group-item">
-                        <a href=""><i class="fa-regular fa-arrow-pointer"></i><span class="sidebar-item"> orders <span class="badge bg-primary">12</span></span> </a>
+                        <a href="{{route('admin.order.index')}}"><i class="fa-regular fa-arrow-pointer"></i><span class="sidebar-item"> orders <span class="badge bg-primary d-inline p-2 ms-5">{{$orders->count()}}</span></span> </a>
                     </li>
                     <li class="list-group-item dropdown">
                         <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-tag"></i><span class="sidebar-item"> Product</span></a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="{{route('admin.product.index')}}">All Product</a></li>
                             <li><a class="dropdown-item" href="{{route('admin.product.create')}}">New Product</a></li>
-                            <li><a class="dropdown-item" href="#">Categories</a></li>
+                            <li><a class="dropdown-item" href="{{route('admin.category.index')}}">Categories</a></li>
                             <li><a class="dropdown-item" href="#">Reviews</a></li>
                         </ul>
                     </li>
                     <li class="list-group-item ">
-                        <a href=""><i class="fa-regular fa-user"></i><span class="sidebar-item">Customers</span></a>
+                        <a href="{{route('admin.customer.index')}}"><i class="fa-regular fa-user"></i><span class="sidebar-item">Customers</span></a>
                     </li>
                     <li class="list-group-item">
                         <a href=""><i class="fa-regular fa-chart-line"></i><span class="sidebar-item">Insight </span> </a>
@@ -77,6 +102,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="{{asset('frontoffice/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('backoffice/js/images.js')}}"></script>
+    <script src="{{asset('backoffice/js/quantity.js')}}"></script>
     <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.ckbox.io/CKBox/1.3.2/ckbox.js"></script>
     <script>

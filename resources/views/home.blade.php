@@ -33,50 +33,19 @@
       <p class="text-center mb-5">جرب الجديد الآن</p>
     </div>
     <div class="row">
+      @foreach ($products as $product)    
       <div class="col-sm-3">
           <div class="card" style="width: 18rem;">
-              <img src="{{asset('carousel/carousel3.jpeg')}}" class="card-img-top" alt="...">
+              <img src="{{asset('uploads/products/'.$product->images->first()->name)}}" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-title text-center text-bold"><b>مقلاة أربع ثقوب غير لاصقة</b></p>
-                <p class="card-title text-center"><del class="old-price">299,00 د.م</del> <span class="h5 mx-4">199,00 د.م</span></p>
+                <p class="card-title text-center text-bold"><b>{{$product->name}}</b></p>
+                <p class="card-title text-center"><del class="old-price">{{$product->compare_price}},00 د.م</del> <span class="h5 mx-4">{{$product->price}},00 د.م</span></p>
 
-                <a href="#" class="btn btn-primary d-block">إضغط هنا للطلب</a>
+                <a href="{{route('product.show',['product' => $product])}}" class="btn btn-primary d-block">إضغط هنا للطلب</a>
               </div>
           </div>
       </div>
-      <div class="col-sm-3">
-        <div class="card" style="width: 18rem;">
-            <img src="{{asset('carousel/carousel3.jpeg')}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-title text-center text-bold"><b>مقلاة أربع ثقوب غير لاصقة</b></p>
-              <p class="card-title text-center"><del class="old-price">299,00 د.م</del> <span class="h5 mx-4">199,00 د.م</span></p>
-
-              <a href="#" class="btn btn-primary d-block">إضغط هنا للطلب</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card" style="width: 18rem;">
-          <img src="{{asset('carousel/carousel3.jpeg')}}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-title text-center text-bold"><b>مقلاة أربع ثقوب غير لاصقة</b></p>
-            <p class="card-title text-center"><del class="old-price">299,00 د.م</del> <span class="h5 mx-4">199,00 د.م</span></p>
-
-            <a href="#" class="btn btn-primary d-block">إضغط هنا للطلب</a>
-          </div>
-      </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card" style="width: 18rem;">
-        <img src="{{asset('carousel/carousel3.jpeg')}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-title text-center text-bold"><b>مقلاة أربع ثقوب غير لاصقة</b></p>
-          <p class="card-title text-center"><del class="old-price">299,00 د.م</del> <span class="h5 mx-4">199,00 د.م</span></p>
-
-          <a href="#" class="btn btn-primary d-block">إضغط هنا للطلب</a>
-        </div>
-    </div>
-</div>
+      @endforeach
     </div>  
   </div>
 

@@ -2,24 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\frontoffice\ProductController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::prefix('product')->name('product.')->group(function(){
 
-Route::get('/product/{product}', function () {
-    return view('frontoffice.product.show');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+
 });
 
 Route::get('/thankyou', function () {
-    return view('frontoffice.Product.thankyou');
+    return view('frontoffice.product.thankyou');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);

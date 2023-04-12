@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('backoffice.category.index',[
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -34,10 +37,18 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories,name',
             'slug' => 'required|unique:categories,slug',
             'visible' => 'nullable',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:210'
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->move(public_path('uploads/categories'), $name);
+            $filename = basename($path);
+        }
         Category::create([
             'name' => $request->name,
             'slug' => $request->slug,
+            'image' => isset($filename)?$filename:'default.jpg',
             'visible' => isset($request->visible)?'1':'0'
 
         ]);
@@ -58,7 +69,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('backoffice.category.edit',[
+            'category' => $category
+        ]);
     }
 
     /**
@@ -66,12 +79,29 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|unique:categories,name',
+            'slug' => 'required|unique:categories,slug',
+            'visible' => 'nullable',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:210'
+        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->move(public_path('uploads/categories'), $name);
+            $filename = basename($path);
+        }
+        $category->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'image' => isset($filename)?$filename:'default.jpg',
+            'visible' => isset($request->visible)?'1':'0'
 
-    /**
-     * Remove the specified resource from storage.
-     */
+        ]);
+
+        return redirect()->back()->with('success', 'Category updated successfully');
+    }
+    
     public function destroy(Category $category)
     {
         //

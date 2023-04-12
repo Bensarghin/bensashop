@@ -31,7 +31,7 @@
                     <div class="mb-4 ">
                         <div class="card">
                         <div class="card-body" style="padding: 5px !important">
-                            <p class="d-inline w-50">https://mokunshop.com/product/</p>
+                            <p class="d-inline w-50">{{env('APP_URL')}}/product/</p>
                             <input class="d-inline w-50 form-control" type="text" value="{{old('slug')}}" placeholder="Slug ..." name="slug">
                         </div>
                         </div>
@@ -104,6 +104,10 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <div class="card mb-3">
+        <div class="card-body">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
 </form>
 @endsection

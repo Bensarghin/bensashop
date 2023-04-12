@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -13,7 +12,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return  view('backoffice.customer.index',[
+            'customers' => $customers
+        ]);
     }
 
     /**
@@ -21,15 +23,29 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return  view('backoffice.customer.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCustomerRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'address' => 'required|max:255',
+            'city' => 'required|string|max:255',
+            'phone' => 'required|digits:10'
+        ]);
+
+        Customer::create([
+            'full_name' => $request->full_name,
+            'address' => $request->address,
+            'city' => $request->city,
+            'phone' => $request->phone
+        ]);
+
+        return redirect()->back()->with('success','Customer added succesfully');
     }
 
     /**
@@ -51,7 +67,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerRequest $request, Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
         //
     }

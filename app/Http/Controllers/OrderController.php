@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Customer;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -13,7 +15,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        $products = Product::all();
+        $customers = Customer::all();
+        return view('backoffice.order.index',[
+            'orders' => $orders,
+            'products' => $products,
+            'customers' => $customers,
+        ]);
     }
 
     /**
@@ -21,7 +30,12 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        $customers = Customer::all();
+        return view('backoffice.order.create',[
+            'products' => $products,
+            'customers' => $customers,
+        ]);
     }
 
     /**

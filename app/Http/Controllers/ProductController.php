@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
@@ -55,7 +56,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'compare_price' => $request->compare_price,
             'description' => $request->description,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->slug,'-'),
             'visible' => isset($request->visible)?'1':'0',
             'category_id' => $request->category
 
@@ -64,7 +65,7 @@ class ProductController extends Controller
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $image) {
                 $name = uniqid() . '.' . $image->getClientOriginalExtension();
-                $path = $image->move(public_path('uploads'), $name);
+                $path = $image->move(public_path('uploads/products'), $name);
                 $filename = basename($path);
                 Image::create([
                     'product_id' => $product->id,
