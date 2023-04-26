@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Customer;
-use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
+
 
 class OrderController extends Controller
 {
@@ -41,9 +41,23 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pay_status' => 'required',
+            'ship_status' => 'required',
+            'product_id' => 'required',
+            'customer_id' => 'required',
+        ]);
+
+        Order::create([
+            'pay_status' => $request->pay_status,
+            'ship_status' => $request->ship_status,
+            'product_id' => $request->product_id,
+            'customer_id' => $request->customer_id
+        ]);
+
+        return redirect()->back()->with('success','order added');
     }
 
     /**
@@ -65,7 +79,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, Order $order)
     {
         //
     }

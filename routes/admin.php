@@ -22,5 +22,9 @@ Route::resource('order', OrderController::class);
 
 });
 
-Auth::routes();
+Auth::routes([
+    // 'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
 ?>

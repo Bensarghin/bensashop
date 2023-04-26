@@ -30,13 +30,13 @@
         </nav>
         <nav class="navbar navbar-expand-lg p-4 bg-body-tertiary shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="#"><img src="{{asset('frontoffice/img/logo.svg')}}" width="241px" alt=""></a>
+                <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('frontoffice/img/logo.svg')}}" width="212px" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav m-auto">
-                    <a class="nav-link  active" aria-current="page" href="#"><b>الصفحة الرئيسية</b></a>
+                    <a class="nav-link  active" aria-current="page" href="{{route('home')}}"><b>الصفحة الرئيسية</b></a>
                     <a class="nav-link " href="#"><b>المجموعات</b></a>
                     <a class="nav-link " href="#"><b>آخر المنتجات</b></a>
                 </div>
@@ -59,7 +59,8 @@
           // Attach a click event listener to each of the other images
           $('.variants-img').on('click', function() {
             $('.variants-img').css({
-                'border' : 'none'
+                'border' : '1px solid #f9f3f0',
+                'border-radius' : '3px'
               });
               // Get the source of the clicked image
               var clickedSrc = $(this).attr('src');

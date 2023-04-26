@@ -11,6 +11,35 @@ a {
     text-decoration: none;
     color: #1c1c1cad;
 }
+
+/* ===
+**** bootstrap fixes ****
+=== */
+.btn, .form-control {
+    border-radius: 0;
+}
+.sidebar-item .badge {
+    border-radius: 50% !important;
+    width: 23px;
+    height: 23px;
+    /* text-align: center; */
+    line-height: 0.4rem;
+    font-size: 14px;
+    font-weight: bold;
+}
+/* ===
+**** images preview css ****
+=== */
+#image-preview > .row > .col-sm-3 {
+    position: relative;
+}
+#image-preview > .row > .col-sm-3 button{
+    position: absolute;
+    top: 0;
+    left: 14px;
+    font-weight: bold;
+}
+
 /* ===
 **** quatity custom css ****
     === */
@@ -72,9 +101,19 @@ nav.bg-body-tertiary {
     text-decoration: none;
     color: #FFF;
     padding: 15px;
+    position: relative;
 }
-.list-group-item > a:hover {
+.list-group-item > a:hover,.list-group-item > .active {
    background-color: rgba(0, 0, 0, 0.2);
+}
+.list-group-item > .active::before {
+    content:"";
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    background-color: #FFF;
+    top: 0;
+    left: 0;
 }
 .list-group-item > a .sidebar-item {
     display: inline-block;
@@ -89,4 +128,18 @@ nav.bg-body-tertiary {
     font-weight: bold;
     color: #9aa4b2;
     width: 26px;
+}
+
+.sub-group {
+    padding: 0;
+    background-color: #03384c
+}
+
+.sub-group a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    padding-left: 55px;
+    color: #bbb;
+    font-size: 14px;
 }

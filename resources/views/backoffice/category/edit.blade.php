@@ -3,25 +3,26 @@
 
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>{{Session::get('success')}}</p>
+    <strong>Success!</strong> {{Session::get('success')}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<h5 class="mb-3">Create Category</h5>
-<form action="{{route('admin.category.update',['category' => $category])}}" method="post" enctype="multipart/form-data">
+<h5 class="mb-3">Update Category</h5>
+<form action="{{route('admin.category.update',['category' => $category])}}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     @if ($category)
     <div class="row">
         <div class="col-sm-8">
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="category" class="form-label">Name:</label>
+                        <label for="category" class="form-label">Name *</label>
                         <input type="text" class="form-control" value="{{$category->name}}" placeholder="Enter category name ..." name="name">
                         @error('name') <span class="text-danger"> {{$message}} </span> @enderror
                     </div>
-                    <div class="mb-4 ">
-                        <label for="category" class="form-label">Slug:</label>
+                    <div class="mb-4">
+                        <label for="category" class="form-label">Slug *</label>
                         <div class="card">
                             <div class="card-body" style="padding: 5px !important">
                                 <p class="d-inline w-50">{{env('APP_URL')}}/category/</p>
@@ -29,6 +30,11 @@
                             </div>
                         </div>
                          @error('slug') <span class="text-danger"> {{$message}} </span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description (optional)</label>
+                        <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$category->description}}</textarea>
+                        @error('description') <span class="text-danger"> {{$message}} </span> @enderror
                     </div>
                 </div>
             </div>
@@ -54,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="card mb-3">
+    <div class="card my-4">
         <div class="card-body">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>

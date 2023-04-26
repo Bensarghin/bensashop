@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-6"><h4>customers <span class="text-danger">({{$customers->count()}}) </span></h4></div>
             <div class="col-6">
-                <a href="{{route('admin.customer.create')}}" class="btn btn-danger float-end">New customer +</a>
+                <a href="{{route('admin.customer.create')}}" class="btn btn-primary float-end">New customer +</a>
             </div>
         </div>
     </div>
@@ -28,8 +28,7 @@
                         <td> {{$customer->address}} </td>
                         <td> {{$customer->city}} </td>
                         <td>
-                            <a href="" class="btn btn-success btn-sm"><i class="fa-solid fa-eye"></i> </a>
-                            <a href="{{route('admin.customer.edit',['customer' => $customer])}}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen"></i> </a>
+                            <a href="{{route('admin.customer.edit',['customer' => $customer])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen"></i> </a>
                             <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a> 
                             <a href="" class="btn btn-secondary btn-sm"><i class="fa-solid fa-copy"></i></a>
                         </td>

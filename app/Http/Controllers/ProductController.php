@@ -6,8 +6,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -40,12 +40,12 @@ class ProductController extends Controller
     {
         $request->validate([
             
-            'name' => 'required',
+            'name' => 'required|string|max:255|unique:products,name',
+            'slug' => 'required|string|max:255|unique:products,slug',
             'price' => 'required|numeric',
             'compare_price' => 'required|numeric',
             'description' => 'required',
-            'slug' => 'required|unique:products,slug',
-            'category' => 'required',
+            'categories' => 'required',
             'visible' => 'nullable',
             'files.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
         ]);
@@ -57,10 +57,11 @@ class ProductController extends Controller
             'compare_price' => $request->compare_price,
             'description' => $request->description,
             'slug' => Str::slug($request->slug,'-'),
-            'visible' => isset($request->visible)?'1':'0',
-            'category_id' => $request->category
+            'visible' => isset($request->visible)?'1':'0'
 
         ]);
+
+        $product->categories()->attach($request->categories);
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $image) {
@@ -75,7 +76,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Product added successfully');
+        return redirect()->back()->with('success', 'Product Added');
     }
 
     /**
@@ -91,15 +92,65 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('backoffice.product.edit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            
+            'name' => 'required|string|max:255|unique:products,name,'.$product->id,
+            'slug' => 'required|string|max:255|unique:products,slug,'.$product->id,
+            'price' => 'required|numeric',
+            'compare_price' => 'required|numeric',
+            'description' => 'required',
+            'categories' => 'required',
+            'visible' => 'nullable',
+            'files.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
+        ]);
+
+        $product->update([
+
+            'name' => $request->name,
+            'price' => $request->price,
+            'compare_price' => $request->compare_price,
+            'description' => $request->description,
+            'slug' => Str::slug($request->slug,'-'),
+            'visible' => isset($request->visible)?'1':'0'
+
+        ]);
+
+        $product->categories()->sync($request->categories);
+
+        if ($request->hasFile('files')) {
+            if($product->images->count() >0 ) {
+                Image::where('product_id',  $product->id)->delete();
+                foreach ($product->images as $image) {
+                    if(File::exists(public_path('uploads/products/').$image->name)) {
+                        File::delete(public_path('uploads/products/').$image->name);
+                    }
+                }
+            }
+            foreach ($request->file('files') as $image) {
+                $name = uniqid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->move(public_path('uploads/products'), $name);
+                $filename = basename($path);
+                Image::create([
+                    'product_id' => $product->id,
+                    'name' => $filename
+                ]);
+
+            }
+        }
+
+        return redirect()->back()->with('success', 'Product Updated');
     }
 
     /**
@@ -107,6 +158,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->images->count() >0 ) {
+            foreach ($product->images as $image) {
+                if(File::exists(public_path('uploads/products/').$image->name)) {
+                    File::delete(public_path('uploads/products/').$image->name);
+                }
+            }
+        }
+        $product->delete();
     }
 }

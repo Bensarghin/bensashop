@@ -3,22 +3,12 @@
 
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>{{Session::get('success')}}</p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
-@if($errors->any())
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </ul>
+    <strong>Success!</strong> {{Session::get('success')}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 <h5 class="mb-3">New Product</h5>
-<form action="{{route('admin.product.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-sm-8">
@@ -53,6 +43,7 @@
                     </div>
                     <div class="mb-4">
                         <textarea name="description" id="editor" cols="30" rows="100">{{old('description')}}</textarea>
+                        @error('description') <span class="text-danger"> {{$message}} </span> @enderror
                     </div>
                 </div>
             </div>
@@ -61,16 +52,15 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h5>Images</h5>
+                             @error('files[]') <span class="text-danger"> {{$message}} </span> @enderror
                         </div>
                         <div class="col-sm-6">
-                            <input class="form-control" type="file" id="files" name="files[]" multiple>
+                            <input class="form-control" id="image-files" type="file" name="files[]" multiple>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="field" align="left">
-                        
-                    </div>
+                    <div id="image-preview"></div>
                 </div>
             </div>
         </div>
@@ -91,14 +81,14 @@
             </div>
             <div class="mb-4">
                 <div class="card">
-                    <div class="card-header"><h5>Category</h5></div>
+                    <div class="card-header"><h5>Categories</h5></div>
                     <div class="card-body">
-                        <select name="category" id="" class="form-control">
-                            <option disabled>Selelect Category From Here</option>
+                        <select name="categories[]" multiple class="select-multiple form-control">
                             @foreach ($categories as $category)
                             <option {{old('category')==$category->id?'selected':''}} value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
+                        @error('categories') <span class="text-danger"> {{$message}} </span> @enderror
                     </div>
                 </div>
             </div>

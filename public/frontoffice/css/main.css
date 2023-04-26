@@ -29,20 +29,19 @@ hr{
 .btn-primary {
     background-color: #00425a;
     border-color: #00425a;
-    border-radius: 4px;
+    border-radius: 0;
     padding: 10px 40px;
     font-size: 20px;
     display: block;
     width: 100%;
 }
-.btn-primary:hover {
+.btn-primary:hover,.btn-primary:visited,.btn-primary:active,.btn-primary:link {
 
     background-color: #03394c;
     border-color: #00425a;
 }
 .list-unstyled > .list-item {
     display: inline-block;
-    margin-left: 17px;
 }
 .list-unstyled > .list-item > a{
   text-decoration: none;
@@ -76,9 +75,44 @@ input{
 /* ===
     ***** sale page **** 
     === */
+.product_info, 
+.related-product {
+    padding: 50px;
+    margin-top: 90px; 
+}
+.related-product h1 {
+    position: relative;
+}
+.related-product h1::after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    bottom: -17px;
+    right: 13px;
+    width: 97px;
+    background-color: #db5656;
+}
+.variants .variant-item {
+    display: inline-block;
+    margin: 10px 7px;
+}
+.variants .variant-item label{
+    padding: 7px 17px;
+    font-weight: 600;
+}
+.variants h3 {
+    margin: 25px 0 9px 0;
+    font-size: 23px;
+    font-weight: 600;
+}
+@media (max-width: 720px) {
+    .product_info {
+        padding: 0;
+    }
+}
 .product-name {
     font-weight: 900;
-    margin: 0;
+    margin:12px 0;
     font-size: 33px;
 }
 .nav-item {
@@ -87,12 +121,12 @@ input{
 }
 .product-description-title {
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     position: relative;
     width: 100px;
     margin: 0 auto;
     color: #000;
-    font-size: 22px;
+    font-size: 17px;
 }
 .btn-link {
     text-decoration: none;
@@ -102,8 +136,8 @@ input{
     content: "";
     height: 2px;
     bottom: -17px;
-    right: 0;
-    width: 114px;
+    right: 13px;
+    width: 97px;
     background-color: #db5656;
 }
 #main-img {
@@ -131,6 +165,7 @@ input{
     font-weight: 600;
     color: #db5656;
     margin: 0 12px;
+    padding: 8px;
 }
 .call-to-action {
     font-weight: 600;

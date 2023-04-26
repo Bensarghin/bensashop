@@ -3,12 +3,12 @@
 
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>{{Session::get('success')}}</p>
+    <strong>Success!</strong> {{Session::get('success')}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 <h5 class="my-4">New Order</h5>
-<form action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('admin.order.store')}}" method="POST">
     @csrf
     <div class="row">
         <div class="col-sm-8">
@@ -20,7 +20,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Product</label>
-                            <select name="product" id="" class="form-control">
+                            <select name="product_id" id="" class="form-control">
                                 <option selected>Select product from here</option>
                                 @foreach ($products as $product)
                                     <option value="{{$product->id}}"> {{$product->name}} </option> 
@@ -51,6 +51,7 @@
                             <select name="ship_status" id="" class="form-control">
                                 <option value="unshiped">Unshiped</option>
                                 <option value="shiped">Shiped</option>
+                                <option value="return">Return</option>
                                 <option value="fullfilled">Fullfilled</option>
                             </select>
                         </div>
@@ -86,7 +87,7 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <select name="customer" id="" class="form-control">
+                        <select name="customer_id" id="" class="form-control">
                             <option selected>Select customer from here</option>
                             @foreach ($customers as $customer)
                              <option value="{{$customer->id}}">{{$customer->full_name}}</option> 
