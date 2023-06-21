@@ -33,20 +33,28 @@
       <p class="text-center mb-5">جرب الجديد الآن</p>
     </div>
     <div class="row">
-      @foreach ($products as $product)    
+    @foreach ($products as $product)    
       <div class="col-sm-3">
-          <div class="card" style="width: 18rem;">
+          <div class="card">
+            @if($product->images->count() > 0)
               <img src="{{asset('uploads/products/'.$product->images->first()->name)}}" class="card-img-top" alt="...">
+            @else
+              <img src="{{asset('uploads/default/product.webp')}}" class="card-img-top" alt="...">
+            @endif  
               <div class="card-body">
                 <p class="card-title text-center text-bold"><b>{{$product->name}}</b></p>
-                <p class="card-title text-center"><del class="old-price">{{$product->compare_price}},00 د.م</del> <span class="h5 mx-4">{{$product->price}},00 د.م</span></p>
-
-                <a href="{{route('product.show',['product' => $product])}}" class="btn btn-primary d-block">إضغط هنا للطلب</a>
+                <p class="text-center">
+                  <del class="compare-price">{{$product->compare_price}},00 د.م</del> 
+                  <span class="new-price mx-1">{{$product->price}},00 د.م</span></p>
+                <div class="w-100 text-center">
+                  <a href="{{route('product.show',['product' => $product])}}" class="btn btn-primary d-inline w-50">إضغط هنا للطلب</a>
+                  <a href="#" class="btn btn-light d-inline add-to-cart w-50" style="background: #f8f9fa !important; border:1px solid rgba(0, 0, 0, 0.05) !important;" data-product-id="{{$product->id}}"> أضف إلى السلة </a>
+                </div>
               </div>
           </div>
       </div>
       @endforeach
-    </div>  
+    </div>
   </div>
 
 @endsection

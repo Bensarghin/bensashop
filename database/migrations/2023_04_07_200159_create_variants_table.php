@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->string('label');
+            $table->boolean('active')->default('0');
             $table->timestamps();
         });
     }

@@ -14,14 +14,18 @@
                 <div class="row">
                     <div class="col-3">
                         <div id="small-images-container">
+                            @if($product->images->count() > 0)
                             @foreach ($product->images as $image)
                                 <img src="{{asset('uploads/products/'.$image->name)}}" alt="" class="img-thumbnail variants-img" >
                             @endforeach
+                            @endif
                         </div>
                     </div>
+                    @if($product->images->count() > 0)
                     <div class="col-9">
                         <img src="{{asset('uploads/products/'.$product->images->first()->name)}}" id="main-img" class="img-thumbnail" alt="">
                     </div>
+                    @endif
                 </div>
                 </div>
                 <div class="col-sm-6 mt-4">
@@ -78,7 +82,7 @@
                             </div>
                         </div>
                         <div class="mt-3 d-block">
-                            <button class="btn btn-primary call-to-action d-block" type="submit">إضغط هنا للطلب</button>
+                            <button class="btn btn-primary call-to-action d-block w-100" type="submit">إضغط هنا للطلب</button>
                         </div>
                     </form>
                 </div>
@@ -88,12 +92,12 @@
     <div class="product_info">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="btn btn-link active" id="description-tab" data-bs-toggle="pill" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
+                <button class="btn btn-link active text-decoration-none" id="description-tab" data-bs-toggle="pill" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
                     <h3 class="product-description-title">وصف المنتج</h3>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="btn btn-link" id="review-tab" data-bs-toggle="pill" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">
+                <button class="btn btn-link text-decoration-none" id="review-tab" data-bs-toggle="pill" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">
                     <h3 class="product-description-title">أراء الزبناء</h3>
                 </button>
             </li>

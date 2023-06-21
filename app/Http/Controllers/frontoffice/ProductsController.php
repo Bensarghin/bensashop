@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductsController extends Controller
 {
     public function show(Product $product) {
         return view('frontoffice.product.show',[
@@ -50,5 +50,10 @@ class ProductController extends Controller
         return view('frontoffice.product.thankyou',[
             'order' => $order
         ]);
+    }
+
+    public function getProducts() {
+        $products = Product::with('images')->get();
+        return response()->json($products);
     }
 }

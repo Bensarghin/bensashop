@@ -3,10 +3,6 @@
     blue : #00425a
     red : #db5656
     === */
-body {
-    font-family: none !important;
-    color: #1a1919 !important
-}
 label {
     color: #7e7e7e;
     cursor: pointer;
@@ -16,29 +12,46 @@ label {
 hr{
     border-width: 1px;
 }
+.card-body .card-title {
+    
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 400;
 
+}
+.bg-striped {
+    background:rgba(0, 0, 0, 0.05);
+}
 /* ===
 ***** bootstrap fix **** 
 === */
 .bg-body-tertiary {
     background-color: #FFF !important;   
 }
+.bg-body-tertiary .nav-link{
+    font-size: 14px;
+}
 .new-price, .old-price {
     font-family: sans-serif;
 }
-.btn-primary {
-    background-color: #00425a;
-    border-color: #00425a;
-    border-radius: 0;
-    padding: 10px 40px;
-    font-size: 20px;
-    display: block;
-    width: 100%;
-}
-.btn-primary:hover,.btn-primary:visited,.btn-primary:active,.btn-primary:link {
+.btn {
 
-    background-color: #03394c;
-    border-color: #00425a;
+    border-radius: 2px !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+}
+.btn-primary,.btn-primary:hover,.btn-primary:visited,.btn-primary:active,.btn-primary:link{
+    background-color: #03394c !important;
+    border-color: #00425a !important;
+}
+.btn-light {
+    background-color: #FFF !important;
+    border-color: #FFF !important;
+}
+.btn-primary:hover {
+    background-color: #00425af5  !important;
+    border-color: #00425af5  !important;
+  
 }
 .list-unstyled > .list-item {
     display: inline-block;
@@ -48,14 +61,14 @@ hr{
   color: #cd0404;
 }
 .badge {
-    padding: 9px 15px;
-    border-radius: 5px;
+    margin: 0 5px;
+    padding: 9px 15px !important;
+    border-radius: 5px !important;
 }
 
 input{
     border-radius: 0 !important;
 }
-
 /* === 
     **** top navbar sale bar ****
 === */
@@ -68,7 +81,7 @@ input{
     color: #FFF;
     text-align: center;
     line-height: 2.7em;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -94,11 +107,14 @@ input{
 }
 .variants .variant-item {
     display: inline-block;
-    margin: 10px 7px;
+    margin: 10px 4px;
 }
 .variants .variant-item label{
     padding: 7px 17px;
     font-weight: 600;
+    border-radius: 3px;
+    background-color: #FFF;
+
 }
 .variants h3 {
     margin: 25px 0 9px 0;
@@ -161,8 +177,8 @@ input{
     font-family: none;
 }
 .new-price {
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 20px !important;
+    font-weight: 600 !important;
     color: #db5656;
     margin: 0 12px;
     padding: 8px;
@@ -170,4 +186,24 @@ input{
 .call-to-action {
     font-weight: 600;
 
+}
+
+/* navbar */
+.shopping-cart {
+    cursor: pointer;
+}
+.shopping-cart .count {
+    position: absolute;
+    background: #f76b6a;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    height: 20px;
+    left: 15px;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    top: -5px;
+    width: 20px;
 }

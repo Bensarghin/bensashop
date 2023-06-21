@@ -11,7 +11,20 @@ a {
     text-decoration: none;
     color: #1c1c1cad;
 }
-
+.btn-primary {
+    background-color: #00425AFF;
+    border-color: #00425AFF;
+}
+#editor {
+    border: none;
+}
+#editor img {
+    width: 50%;
+}
+#editor:focus {
+    outline: none;
+    border: none !important;
+}
 /* ===
 **** bootstrap fixes ****
 === */
@@ -80,6 +93,41 @@ nav.bg-body-tertiary {
     width: 20px;
 }
 
+/* Upload Images with preview  */
+.remove-img-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image-preview img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 10px;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay:hover {
+    opacity: 1;
+  }
 /* ===
 **** left sidebar offcanvas ***** 
    === */

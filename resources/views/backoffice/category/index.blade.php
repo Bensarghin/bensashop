@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-6"><h4>categories <span class="text-danger">({{$categories->count()}}) </span></h4></div>
         <div class="col-6">
-            <a href="{{route('admin.category.create')}}" class="btn btn-success float-end">New Category +</a>
+            <a href="{{route('admin.category.create')}}" class="btn btn-primary float-end">New Category +</a>
         </div>
     </div>
 </div>

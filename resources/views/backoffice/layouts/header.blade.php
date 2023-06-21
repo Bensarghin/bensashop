@@ -12,15 +12,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('frontoffice/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontoffice/css/all.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('backoffice/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('backoffice/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('backoffice/css/images.css')}}">
     <link rel="stylesheet" href="{{asset('backoffice/css/select2.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('backoffice/css/main.css')}}">
+
+    @vite(['resources/js/app.js'])
 </head>
 <body>
-    
-    <div id="app">
         <nav class="navbar bg-body-tertiary border-bottom">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Navbar</a>

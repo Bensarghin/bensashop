@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
+
 class ProductController extends Controller
 {
     /**
@@ -29,7 +30,7 @@ class ProductController extends Controller
     {
         $categories = Category::where('visible','1')->get();
         return view('backoffice.product.create',[
-            'categories' => $categories
+            'categoriesData' => $categories,
         ]);
     }
 
@@ -47,7 +48,7 @@ class ProductController extends Controller
             'description' => 'required',
             'categories' => 'required',
             'visible' => 'nullable',
-            'files.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
+            'files.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
         ]);
 
         $product = Product::create([
@@ -76,7 +77,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Product Added');
+        return response()->json(['success' => "Product added"]);
     }
 
     /**
@@ -113,7 +114,7 @@ class ProductController extends Controller
             'description' => 'required',
             'categories' => 'required',
             'visible' => 'nullable',
-            'files.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
+            'files.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:1024'
         ]);
 
         $product->update([
@@ -166,5 +167,23 @@ class ProductController extends Controller
             }
         }
         $product->delete();
+    }
+
+    public function uploadImage(Request $request) {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+        ]);
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $imageName);
+
+            $imageUrl = asset('uploads/' . $imageName);
+
+            return response()->json(['imageUrl' => $imageUrl], 200);
+        }
+
+        return response()->json(['message' => 'Invalid image'], 400);
     }
 }
